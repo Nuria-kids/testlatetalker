@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Late Talker Test | Nuria Kids</title>
+    <style>
+        :root {
+            --primary: #FF6B9D;
+            --bg: #FFFDF8;
+            --text: #2D3436;
+            --red-flag: #E53E3E;
+            --warning: #F0B429;
+            --success: #0C6E5A;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary), #FF8FB1);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        h1 { margin: 0; font-size: 24px; }
+        .subtitle { font-size: 14px; opacity: 0.9; margin-top: 5px; }
+        .question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .question h3 { margin: 0 0 15px 0; font-size: 17px; }
+        label {
+            display: block;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 15px;
+        }
+        label:hover { background: #f8f9fa; }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .age-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .result-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: 600;
+            line-height: 1.6;
+            display: none;
+        }
+        .result-box.visible { display: block !important; }
+        .strategy-list {
+            margin: 15px 0;
+            padding-left: 20px;
+            font-size: 14px;
+            font-weight: normal;
+            list-style: none;
+        }
+        .strategy-list li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .strategy-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .action-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🏥 LATE TALKER TEST</h1>
+    <p class="subtitle">3 minutos para saber si tu bebé necesita ayuda</p>
+</div>
+
+<!-- PREGUNTA 1: EDAD -->
+<div class="question">
+    <h3>1. ¿Cuántos meses tiene tu bebé (corregidos)?</h3>
+    <input type="number" class="age-input" id="edad" placeholder="Ej: 22 meses" min="12" max="42">
+    <p style="font-size: 12px; color: #666; margin-top: 5px;">Si fue prematuro, usa edad corregida</p>
+</div>
+
+<!-- PREGUNTA 2: PALABRAS -->
+<div class="question">
+    <h3>2. ¿Cuántas palabras dice <strong>espontáneamente</strong>?</h3>
+    <label><input type="radio" name="palabras" value="bajo"> Menos de 20 palabras</label>
+    <label><input type="radio" name="palabras" value="medio"> Entre 20-50 palabras</label>
+    <label><input type="radio" name="palabras" value="alto"> Más de 50 palabras</label>
+</div>
+
+<!-- PREGUNTA 3: COMPRENSIÓN -->
+<div class="question">
+    <h3>3. ¿Entiende órdenes de 2 pasos sin ayuda visual?</h3>
+    <label><input type="radio" name="comprension" value="no"> No lo entiende</label>
+    <label><input type="radio" name="comprension" value="parcial"> Entiende con ayuda</label>
+    <label><input type="radio" name="comprension" value="si"> Lo hace perfecto</label>
+</div>
+
+<!-- PREGUNTA 4: SUCCIÓN -->
+<div class="question">
+    <h3>4. ¿Tuvo dificultades de succión al nacer (bibe, pecho, frenillo)?</h3>
+    <label><input type="radio" name="suc" value="si"> Sí, tuvimos problemas</label>
+    <label><input type="radio" name="suc" value="no"> No, todo bien</label>
+</div>
+
+<!-- PREGUNTA 5: RESPIRACIÓN -->
+<div class="question">
+    <h3>5. ¿Mantiene la boca cerrada durante el día?</h3>
+    <label><input type="radio" name="respiracion" value="no"> Respira por la boca</label>
+    <label><input type="radio" name="respiracion" value="si"> Boca cerrada</label>
+</div>
+
+<!-- PREGUNTA 6: GESTOS -->
+<div class="question">
+    <h3>6. ¿Señala con el dedo para COMPARTIR (no solo pedir)?</h3>
+    <label><input type="radio" name="gestos" value="no"> No señala</label>
+    <label><input type="radio" name="gestos" value="si"> Sí, señala</label>
+</div>
+
+<button class="btn" onclick="calcularResultado()">VER MI RESULTADO AHORA</button>
+
+<div id="resultado" class="result-box"></div>
+
+<script>
+function calcularResultado() {
+    // VALIDAR EDAD
+    const edad = parseInt(document.getElementById('edad').value);
+    if (!edad || edad < 12 || edad > 42) {
+        alert('⚠️ Por favor ingresa una edad válida entre 12 y 42 meses');
+        return;
+    }
+
+    // OBTENER RESPUESTAS
+    const respuestas = {
+        palabras: document.querySelector('input[name="palabras"]:checked')?.value,
+        comprension: document.querySelector('input[name="comprension"]:checked')?.value,
+        suc: document.querySelector('input[name="suc"]:checked')?.value,
+        respiracion: document.querySelector('input[name="respiracion"]:checked')?.value,
+        gestos: document.querySelector('input[name="gestos"]:checked')?.value
+    };
+
+    // VALIDAR RESPUESTAS COMPLETAS
+    if (Object.values(respuestas).includes(undefined)) {
+        alert('⚠️ Por favor responde todas las preguntas');
+        return;
+    }
+
+    // CÁLCULO DE RIESGO PONDERADO
+    let riesgo = 0;
+    if (respuestas.palabras === 'bajo') {
+        if (edad >= 30) riesgo += 4;
+        else if (edad >= 24) riesgo += 3;
+        else riesgo += 2;
+    } else if (respuestas.palabras === 'medio' && edad >= 30) {
+        riesgo += 2;
+    }
+    if (respuestas.comprension === 'no') riesgo += 3;
+    else if (respuestas.comprension === 'parcial') riesgo += 1;
+    if (respuestas.suc === 'si' && edad >= 18) riesgo += 1;
+    if (respuestas.respiracion === 'no') {
+        if (edad >= 24) riesgo += 2;
+        else riesgo += 1;
+    }
+    if (respuestas.gestos === 'no') {
+        if (edad >= 18) riesgo += 3;
+        else riesgo += 1;
+    }
+
+    // GENERAR RESULTADO
+    const resultadoDiv = document.getElementById('resultado');
+    let htmlResultado = '';
+    let claseResultado = '';
+
+    if (riesgo >= 5 || (edad >= 30 && respuestas.palabras === 'bajo')) {
+        claseResultado = 'result-box visible';
+        htmlResultado = `
+            <strong>🚨 ALTO RIESGO (Edad: ${edad} meses)</strong><br><br>
+            <strong>Perfil clínico:</strong> Retraso severo con componente orofacial<br><br>
+            
+            <strong>ACCIONES URGENTES (7 días):</strong>
+            <ul class="strategy-list">
+                <li>🎤 Graba 3 minutos de interacción diaria y anota vocalizaciones</li>
+                <li>👁️ Juego de mirada: coloca a tu bebé frente a ti, habla cuando te mire</li>
+                <li>🎯 Interacción física cara a cara sin juguetes intermedios</li>
+            </ul>
+            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNNxAtHsrulDqJeqJDSyXPFUk2mACFeP6xL0oUb08VjmvPTg/viewform?usp=header" class="action-link" style="color: #E53E3E;">
+            📅 SOLICITA TU PLAN DE ACCIÓN →</a>
+        `;
+    } else if (riesgo >= 2 || (edad >= 24 && respuestas.palabras !== 'alto')) {
+        claseResultado = 'result-box visible';
+        htmlResultado = `
+            <strong>⚠️ RIESGO MODERADO (Edad: ${edad} meses)</strong><br><br>
+            <strong>Perfil clínico:</strong> Late Talker funcional con ${riesgo} áreas por mejorar<br><br>
+            
+            <strong>PROTOCOLO 21 DÍAS (empieza HOY):</strong>
+            <ul class="strategy-list">
+                <li>🔄 Juego de turnos sonoros: tú haces un sonido, esperas 5s a imitación. Repite 10 veces/día</li>
+                <li>📖 Lectura dialogante: pregunta "¿dónde está el perro?" y espera señalación + sonido</li>
+                <li>🍎 Alimentación funcional: ofrece texturas que requieran masticación lateral</li>
+            </ul>
+            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNNxAtHsrulDqJeqJDSyXPFUk2mACFeP6xL0oUb08VjmvPTg/viewform?usp=header" class="action-link" style="color: #F0B429;">
+            🎯 SOLICITA TU PLAN DE ACCIÓN →</a>
+        `;
+    } else {
+        claseResultado = 'result-box visible';
+        htmlResultado = `
+            <strong>✅ DESARROLLO ADECUADO (Edad: ${edad} meses)</strong><br><br>
+            <strong>Perfil clínico:</strong> Lenguaje evolutivo dentro de la normalidad<br><br>
+            
+            <strong>ESTRATEGIAS DE POTENCIACIÓN:</strong>
+            <ul class="strategy-list">
+                <li>🗣️ Input denso: describe cada acción antes de hacerla</li>
+                <li>🔍 Exploración sensorial multi: nombra 5 cosas que ves, 3 que oyes, 1 que hueles</li>
+                <li>🤝 Tareas cooperativas: "pásame el lego rojo, por favor"</li>
+            </ul>
+            
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNNxAtHsrulDqJeqJDSyXPFUk2mACFeP6xL0oUb08VjmvPTg/viewform?usp=header" class="action-link" style="color: #0C6E5A;">
+            📲 SIGUE PARA MÁS ESTRATEGIAS →</a>
+        `;
+    }
+
+    resultadoDiv.className = claseResultado;
+    resultadoDiv.innerHTML = htmlResultado;
+    
+    setTimeout(() => {
+        resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+}
+</script>
+
+</body>
+</html>
